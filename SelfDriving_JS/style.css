@@ -2,7 +2,35 @@ body {
     margin: 0;
     background: darkgray;
     overflow: hidden;
-    text-align: center;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#verticalButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;    
+}
+
+button {
+    height: 50px;
+    width: 50px;
+    font-size: 30px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+#saveButton {
+    background-color: green;
+    color: white;
+}
+
+#discardButton {
+    background-color: red;
+    color: white;
 }
 
 #carCanvas {

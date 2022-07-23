@@ -15,7 +15,8 @@ class Visualizer {
                 0,
                 network.levels.length === 1 ? 0.5 : i / (network.levels.length - 1)
             );
-
+            ctx.setLineDash([7,3]);
+            var char = String.fromCharCode;
             Visualizer.drawLevel(
                 ctx, 
                 network.levels[i], 
@@ -23,7 +24,9 @@ class Visualizer {
                 levelTop, 
                 width, 
                 levelHeight,
-                i == network.levels.length-1 ? ["Up", "Left", "Right", "Rev."] : []
+                i == network.levels.length-1 ? [
+                    char(0x21A5), char(0x21A4), char(0x21A6), char(0x21A7)
+                ] : []
             );
 
         }
@@ -53,7 +56,7 @@ class Visualizer {
                 );
                 // deciding connection transperancy based on weights
                 ctx.lineWidth = 2;
-                ctx.strokeStyle = getRGBA(weights[i][j]);
+                ctx.strokeStyle = getRGBA(input * weights[i][j]);
                 // ctx.setLineDash([5, 5]);
                 ctx.stroke();
             });        
@@ -99,7 +102,7 @@ class Visualizer {
             ctx.fill();    
             
             ctx.beginPath();
-            ctx.lineWidth = 5;
+            ctx.lineWidth = 2;
             ctx.arc(x, top, nodeRadius * 0.8, 0, Math.PI * 2);
             ctx.strokeStyle = getRGBA(biases[index]);
             ctx.setLineDash([3,3]);
@@ -110,11 +113,12 @@ class Visualizer {
                 ctx.beginPath();
                 ctx.textAlign = "center";
                 ctx.textBaseLine = "middle";
+                ctx.fillStyle = "black";
                 ctx.strokeStyle = "white";
-                ctx.font = (nodeRadius * 1.5) + "px Arial";
-                ctx.fillText(outputLabels[index], x, top-11);
+                ctx.font = "normal normal 900 " + (nodeRadius * 1.4) + "px Arial";
+                ctx.fillText(outputLabels[index], x, top + nodeRadius * 0.5);
                 ctx.lineWidth = 0.5;
-                ctx.strokeText(outputLabels[index], x, top-11);
+                ctx.strokeText(outputLabels[index], x, top + nodeRadius * 0.5);
             }
         });
 
